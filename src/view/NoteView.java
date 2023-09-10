@@ -105,10 +105,12 @@ public class NoteView {
                 if(userSelection.getSelectedItem()!=null) {
                     String username = userSelection.getSelectedItem().toString();
                     User user = userController.getUserByUsername(username);
-                    int toDoIndex = Integer.parseInt(invertToDoFlag.getText());
+                    try {
+                        int toDoIndex = Integer.parseInt(invertToDoFlag.getText());
 
-                    noteController.invertToDoNote(user,toDoIndex);
-                    updateDisplay();
+                        noteController.invertToDoNote(user,toDoIndex);
+                        updateDisplay();
+                    }catch (NumberFormatException ignored){}
                 }
             }
         });
@@ -121,10 +123,12 @@ public class NoteView {
                 if(userSelection.getSelectedItem()!=null) {
                     String username = userSelection.getSelectedItem().toString();
                     User user = userController.getUserByUsername(username);
-                    int toDoIndex = Integer.parseInt(removeNoteIndex.getText());
+                    try {
+                        int toDoIndex = Integer.parseInt(removeNoteIndex.getText());
 
-                    user.removeNote(toDoIndex);
-                    updateDisplay();
+                        user.removeNote(toDoIndex);
+                        updateDisplay();
+                    }catch (NumberFormatException ignored){}
                 }
             }
         });
