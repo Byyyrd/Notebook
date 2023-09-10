@@ -3,11 +3,14 @@ package view;
 import control.NoteController;
 import control.UserController;
 import model.Note;
+import model.QuoteNote;
+import model.User;
 
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class NoteView {
     private JPanel mainPanel;
@@ -83,7 +86,14 @@ public class NoteView {
         addQuote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: Implementiere das Verhalten des addQuote-Buttons
+                //COMPLETE: Implementiere das Verhalten des addQuote-Buttons
+                if(userSelection.getSelectedItem()!=null) {
+                    String username = userSelection.getSelectedItem().toString();
+                    Note note = noteController.createQuoteNote(quoteTitle.getText(),quoteContent.getText(),quoteSource.getText());
+
+                    userController.addNoteToUser(username, note);
+                    updateDisplay();
+                }
             }
         });
 
@@ -91,7 +101,15 @@ public class NoteView {
         invertToDo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: Implementiere das Verhalten des invertToDo-Buttons
+                //COMPLETE: Implementiere das Verhalten des invertToDo-Buttons
+                if(userSelection.getSelectedItem()!=null) {
+                    String username = userSelection.getSelectedItem().toString();
+                    User user = userController.getUserByUsername(username);
+                    int toDoIndex = Integer.parseInt(invertToDoFlag.getText());
+
+                    noteController.invertToDoNote(user,toDoIndex);
+                    updateDisplay();
+                }
             }
         });
 
@@ -99,7 +117,15 @@ public class NoteView {
         removeNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: Implementiere das Verhalten des removeNote-Buttons
+                //COMPLETE: Implementiere das Verhalten des removeNote-Buttons
+                if(userSelection.getSelectedItem()!=null) {
+                    String username = userSelection.getSelectedItem().toString();
+                    User user = userController.getUserByUsername(username);
+                    int toDoIndex = Integer.parseInt(removeNoteIndex.getText());
+
+                    user.removeNote(toDoIndex);
+                    updateDisplay();
+                }
             }
         });
     }

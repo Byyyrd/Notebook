@@ -10,7 +10,7 @@ public class User {
     private int noteCount;
 
     public User(String username){
-        //TODO: Implementiere den Konstruktor.
+        //COMPLETE: Implementiere den Konstruktor.
         this.username = username;
         noteCount = 0;
         notes = new Note[20];
@@ -26,7 +26,7 @@ public class User {
         if (noteCount < notes.length){
             notes[noteCount] = note;
         }else{
-            notes = ArrayHelper.arrayAdd(notes,note);
+            notes = ArrayHelper.arrayAdd(Note.class,notes,note);
         }
         noteCount++;
         return true;
@@ -40,9 +40,12 @@ public class User {
      */
     public boolean removeNote(int index) {
         //COMPLETE: Implementiere die Methode
-        notes[index] = null;
-        noteCount--;
-        ArrayHelper.arrayCompress(notes);
+        if (notes[index] != null){
+            notes[index] = null;
+            noteCount--;
+            ArrayHelper.arrayCompress(notes);
+            return true;
+        }
         return false;
     }
 

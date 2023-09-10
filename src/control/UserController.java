@@ -1,5 +1,6 @@
 package control;
 
+import Helper.ArrayHelper;
 import model.Note;
 import model.User;
 
@@ -8,8 +9,9 @@ public class UserController {
     private int userCount;
 
     public UserController() {
-        //TODO: Implementiere den Konstruktor
-
+        //COMPLETE: Implementiere den Konstruktor
+        users = new User[10];
+        userCount = 0;
     }
 
     /**
@@ -22,9 +24,15 @@ public class UserController {
      * @return Gibt true zurück, falls der Nutzer angelegt werden konnte, sonst false.
      */
     public boolean createUser(String username) {
-        //TODO: Implementiere die Methode
+        //COMPLETE: Implementiere die Methode
 
-        return false;
+        if (userCount < users.length){
+            users[userCount] = new User(username);
+        }else{
+            users = ArrayHelper.arrayAdd(User.class,users,new User(username));
+        }
+        userCount++;
+        return true;
     }
 
     /**
@@ -33,7 +41,12 @@ public class UserController {
      * @return Das gefundene User-Objekt; null, wenn das Objekt nicht existiert.
      */
     public User getUserByUsername(String username) {
-        //TODO: Implementiere die Methode
+        //COMPLETE: Implementiere die Methode
+        for (User user : users) {
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
         return null;
     }
 
@@ -43,7 +56,11 @@ public class UserController {
      * @param note Notiz-Objekt, dass dem Nutzer zugeordnet werden soll
      */
     public void addNoteToUser(String username, Note note){
-        //TODO: Implementiere die Methode.
+        //COMPLETE: Implementiere die Methode.
+        User user = getUserByUsername(username);
+        if(user != null){
+            user.addNote(note);
+        }
     }
 
     /**

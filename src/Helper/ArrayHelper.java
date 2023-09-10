@@ -6,24 +6,24 @@ public class ArrayHelper {
     public static <T> void arrayCompress(T[] array){
         int nullIndex = -1;
         for (int i = 0; i < array.length; i++) {
-            if(array[i] == null){
+            if(array[i] == null && nullIndex == -1){
                 nullIndex = i;
             }
             if(nullIndex != -1 && i > nullIndex){
                 array[i - 1] = array[i];
+                array[i] = null;
             }
         }
         array[array.length-1] = null;
     }
-    public static <T> T[] arrayAdd(T[] array,T toAdd){
+    public static <T> T[] arrayAdd(Class<?> clazz,T[] array,T toAdd){
         if (array != null) {
-            T[] altesArray = array;
-
-            array = (T[]) Array.newInstance(array.getClass(), altesArray.length + 5);
-            System.arraycopy(altesArray, 0, array, 0, altesArray.length);
-            array[altesArray.length] = toAdd;
+            T[] oldArray = array;
+            array = (T[]) Array.newInstance(clazz, oldArray.length + 5);
+            System.arraycopy(oldArray, 0, array, 0, oldArray.length);
+            array[oldArray.length] = toAdd;
         }else {
-            array = (T[]) Array.newInstance(array.getClass(),1);
+            array = (T[]) Array.newInstance(clazz,1);
             array[0] = toAdd;
         }
         return array;
