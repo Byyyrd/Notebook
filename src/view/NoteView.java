@@ -115,7 +115,9 @@ public class NoteView {
 
                         noteController.invertToDoNote(user,toDoIndex);
                         updateDisplay();
-                    }catch (NumberFormatException ignored){}
+                    }catch (NumberFormatException ignored){
+                        JOptionPane.showMessageDialog(getPanel(),"NUH UH Only Strings \u2654 ");
+                    }
                 }
             }
         });
@@ -133,7 +135,9 @@ public class NoteView {
 
                         user.removeNote(toDoIndex);
                         updateDisplay();
-                    }catch (NumberFormatException ignored){}
+                    }catch (NumberFormatException ignored){
+                        JOptionPane.showMessageDialog(getPanel(),"NUH UH Only Strings \u2654 ");
+                    }
                 }
             }
         });

@@ -20,7 +20,6 @@ public class MainProgramm {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     userController.saveUserData();
-                    System.out.println("Hehawhehawe");
                 }
 
             });

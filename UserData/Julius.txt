@@ -1,0 +1,20 @@
+{
+c     HEhahwe
+t     InfoHa
+f     Ja
+}
+{
+c     HEhahwe
+t     InfoHa
+f     Ja
+}
+{
+c     HEhahwe
+t     InfoHa
+f     Ja
+}
+{
+c     HEhahwe
+t     InfoHa
+f     Nein
+}
