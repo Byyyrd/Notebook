@@ -43,6 +43,11 @@ public class NoteView {
         this.userController=userController;
         this.noteController=noteController;
         createButtons();
+        for (User user : userController.getAllUsers()) {
+            if (user != null)
+                userSelection.addItem(user.getUsername());
+        }
+        updateDisplay();
     }
 
     /**

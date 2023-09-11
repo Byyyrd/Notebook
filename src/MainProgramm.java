@@ -14,15 +14,18 @@ public class MainProgramm {
     public static void main(String[] args) {
         UserController userController = new UserController();
         NoteController noteController = new NoteController();
-        MainView mainView = new MainView(userController, noteController);
-        mainView.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                userController.saveUserData();
-                System.out.println("Hehawhehawe");
-            }
+        if(userController.readUserData()){
+            MainView mainView = new MainView(userController, noteController);
+            mainView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    userController.saveUserData();
+                    System.out.println("Hehawhehawe");
+                }
 
-        });
+            });
+        }
+
     }
 }
 
