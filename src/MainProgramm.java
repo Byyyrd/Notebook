@@ -4,20 +4,25 @@ import control.UserController;
 import model.User;
 import view.MainView;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Arrays;
 
 public class MainProgramm {
 
-    public static void main(String[] args){
-        UserController userController=new UserController();
-        NoteController noteController=new NoteController();
+    public static void main(String[] args) {
+        UserController userController = new UserController();
+        NoteController noteController = new NoteController();
         MainView mainView = new MainView(userController, noteController);
-        User[] users = new User[]{new User("Bert"),new User("Samuel"),new User("Maxi")};
-        System.out.println(Arrays.toString(users));
-        users[1] = null;
-        System.out.println(Arrays.toString(users));
-        ArrayHelper.arrayCompress(users);
-        System.out.println(Arrays.toString(users));
+        mainView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                userController.saveUserData();
+                System.out.println("Hehawhehawe");
+            }
+
+        });
     }
 }
 

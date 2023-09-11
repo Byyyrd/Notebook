@@ -27,4 +27,8 @@ public class ToDoNote extends Note {
     public void invertCompleted(){
         completed=!completed;
     }
+
+    public boolean getCompleted() {
+        return completed;
+    }
 }
