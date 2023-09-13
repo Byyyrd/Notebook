@@ -129,11 +129,10 @@ public class NoteView {
                 //COMPLETE: Implementiere das Verhalten des removeNote-Buttons
                 if(userSelection.getSelectedItem()!=null) {
                     String username = userSelection.getSelectedItem().toString();
-                    User user = userController.getUserByUsername(username);
                     try {
                         int toDoIndex = Integer.parseInt(removeNoteIndex.getText());
 
-                        user.removeNote(toDoIndex);
+                        userController.deleteNoteFromUser(username,toDoIndex);
                         updateDisplay();
                     }catch (NumberFormatException ignored){
                         JOptionPane.showMessageDialog(getPanel(),"NUH UH Only Strings \u2654 ");

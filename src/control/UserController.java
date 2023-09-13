@@ -33,7 +33,6 @@ public class UserController {
      */
     public boolean createUser(String username) {
         //COMPLETE: Implementiere die Methode
-
         if (userCount < users.length) {
             users[userCount] = new User(username);
         } else {
@@ -98,91 +97,7 @@ public class UserController {
         return users;
     }
 
-    //HEHHEAHHWE BAD CoDe
-    public void saveUserData() {
-        try {
-            if (userCount != 0) {
-                for (User user : users) {
-                    if (user != null) {
-                        File file = new File(System.getProperty("user.dir") + "\\UserData\\" + user.getUsername() + ".txt");
-                        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-                        for (Note note : user.getNotes()) {
-                            if (note != null) {
-                                writer.write("{\n");
-                                writer.write("c     " + note.getContent() + "\n");
-                                writer.write("t     " + note.getTitle() + "\n");
-                                if (note instanceof QuoteNote) {
-                                    writer.write("s     " + ((QuoteNote) note).getSource() + "\n");
-                                } else if (note instanceof ToDoNote) {
-                                    writer.write("f     " + (((ToDoNote) note).getCompleted() ? "Ja" : "Nein") + "\n");
-                                }
-                                writer.write("}");
-                                writer.newLine();
-                            }
-                        }
-                        writer.close();
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //COMPLETE Implement readUserData
-    public boolean readUserData() {
-        try {
-            File folder = new File(System.getProperty("user.dir") + "\\UserData\\");
-            if(folder.list() == null){
-                return true;
-            }
-            for (File file : Objects.requireNonNull(folder.listFiles())) {
-                String username = file.getName().replace(".txt", "");
-                createUser(username);
-                User user = getUserByUsername(username);
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-                String content = "";
-                String title = "";
-                String completed = "";
-                String source = "";
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    char[] chars = line.toCharArray();
-                    if (chars[0] == 'c') {
-                        chars[0] = ' ';
-                        content = String.valueOf(chars).strip();
-                    }
-                    if (chars[0] == 't') {
-                        chars[0] = ' ';
-                        title = String.valueOf(chars).strip();
-                    }
-                    if (chars[0] == 's') {
-                        chars[0] = ' ';
-                        source = String.valueOf(chars).strip();
-                    }
-                    if (chars[0] == 'f') {
-                        chars[0] = ' ';
-                        completed = String.valueOf(chars).strip();
-                    }
-                    if (chars[0] == '}') {
-                        if (!completed.equals("")) {
-                            ToDoNote note = new ToDoNote(title, content);
-                            if (completed.equals("Ja") && !note.getCompleted()) {
-                                note.invertCompleted();
-                            }
-                            user.addNote(note);
-                        } else {
-                            QuoteNote note = new QuoteNote(title, content,source);
-                            user.addNote(note);
-                        }
-                    }
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public int getUserCount() {
+        return userCount;
     }
 }

@@ -1,6 +1,8 @@
 import Helper.ArrayHelper;
 import control.NoteController;
+import control.ReadController;
 import control.UserController;
+import control.WriteController;
 import model.User;
 import view.MainView;
 
@@ -14,12 +16,12 @@ public class MainProgramm {
     public static void main(String[] args) {
         UserController userController = new UserController();
         NoteController noteController = new NoteController();
-        if(userController.readUserData()){
+        if(ReadController.readUserData(userController)){
             MainView mainView = new MainView(userController, noteController);
             mainView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
-                    userController.saveUserData();
+                    WriteController.saveUserData(userController);
                 }
 
             });
